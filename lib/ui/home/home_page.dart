@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_blog_app/ui/detail/detail_page.dart';
+import 'package:flutter_firebase_blog_app/ui/write/write_page.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -7,6 +8,17 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('BLOG'),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) {
+              return WritePage();
+            }),
+          );
+        },
+        child: Icon(Icons.edit),
       ),
       backgroundColor: Colors.grey[200],
       body: Padding(
