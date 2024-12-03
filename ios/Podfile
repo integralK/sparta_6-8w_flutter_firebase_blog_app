@@ -1,4 +1,3 @@
-# 기존 Podfile 내용
 platform :ios, '13.0'
 
 # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
@@ -37,14 +36,23 @@ target 'Runner' do
   end
 end
 
+# `post_install` 블록 수정: `Pods-Runner.profile.xcconfig` 경로 추가
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     flutter_additional_ios_build_settings(target)
     
-    # The following block sets the C++ standard for the abseil library to C++17
+    # The following block sets the C++ standard for the abseil library to C++14
     if target.name == 'abseil'
       target.build_configurations.each do |config|
-        config.build_settings['CLANG_CXX_LANGUAGE_STANDARD'] = 'c++17'
+        config.build_settings['CLANG_CXX_LANGUAGE_STANDARD'] = 'c++14'
+      end
+    end
+
+    # 여기서 xcconfig 파일 경로를 지정
+    if target.name == 'Runner'
+      target.build_configurations.each do |config|
+        # `Pods-Runner.profile.xcconfig` 파일을 명시적으로 설정
+        config.base_configuration_reference = installer.pods_project.files.find { |file| file.path == 'Pods/Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig' }
       end
     end
   end
