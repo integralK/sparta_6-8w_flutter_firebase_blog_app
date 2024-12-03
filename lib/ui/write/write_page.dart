@@ -37,8 +37,8 @@ class _WritePageState extends State<WritePage> {
                 //
                 print('완료 터치됨');
                 // GestureDetector 사용할때 버튼이 잘 작동하나 이렇게 print문으로 꼭 확인하기!!
-                final result =
-                    formKey.currentState?.validate() ?? false; // 유효성 검사
+                final result = formKey.currentState?.validate() ?? false;
+                // 유효성 검사
               },
               child: Container(
                 // 텍스트가 버튼처럼 쓰일때는 사이즈를 최소 44 이상으로 만들어야 한다! Text-wrap with widget-Container
